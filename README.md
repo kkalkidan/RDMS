@@ -8,7 +8,7 @@ cd build
 
 cmake ..
 
-`
+```
 
 Then you will find `aout` file inside the build directory
 
