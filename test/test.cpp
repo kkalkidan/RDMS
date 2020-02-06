@@ -18,7 +18,7 @@ void createTupleAndTraverse(){
     printf("\n");
 }
 
-void TupleGetElement(){
+void TupleGetElement() {
 
     printf("Testing: Tuple get element \n");
     vector<int> v;
@@ -37,44 +37,83 @@ void TupleGetElement(){
 }
 
 
-Table createTableTraverse(){
+void createTableTraverse(){
+    try {
+        printf("Testing: create table and traverse rows \n");
+        set<string> attr;
+        attr.insert("name");
+        attr.insert("age");
+        Table t("mytable", attr);
+        vector<int> v;
+        v.push_back(9);
+        v.push_back(2);
+        t = t.addRow(v);
 
-    printf("Testing: create table and traverse rows \n");
-    set<string> attr;
-    attr.insert("name");
-    attr.insert("age");
-    Table t("mytable", attr);
-    vector<int> v;
-    v.push_back(9);
-    v.push_back(2);
-    t = t.addRow(v);
-
-    t.showRows();
-    printf("\tPassed");
-    printf("\n\n");
-
-    return t;
+        t.showRows();
+        printf("\tPassed");
+        printf("\n\n");
+    } catch (const char* msg) {
+        printf("\n");
+        cerr << msg << endl;
+        printf("\n");
+   }
 }
 
+void moreThanOneRow() {
+    try {
+        printf("Testing: Handling multiple Rows\n");
+        set<string> attr;
+        attr.insert("name");
+        attr.insert("age");
+        Table t("mytable", attr);
+        vector<int> v;
+        v.push_back(9);
+        v.push_back(2);
+        t = t.addRow(v);
 
+        vector<int> z;
+        z.push_back(2);
+        z.push_back(9);
+        t.addRow(z);
 
-void DuplicateRows(Table t) {
-    printf("Testing: Handling duplicate rows \n");
+        printf("\n");
+        if(t.getRelation().size() == 2){
+            printf("\tPassed");
+        }
+        printf("\n\n");
+        } catch (const char* msg) {
+        printf("\n");
+        cerr << msg << endl;
+        printf("\n");
+   }
+}
 
-    vector<int> v;
-    v.push_back(1);
-    v.push_back(2);
-
-    int size = t.getRelation().size();
-
-    vector<int> z;
-    v.push_back(2);
-    v.push_back(2);
-    printf("\n");
-    if(size == t.getRelation().size()){
-        printf("\tPassed\n");
-    }
-     printf("\n");
+void DuplicateRows() {
+    try {
+        printf("Testing: Handling duplicate rows \n");
+        set<string> attr;
+        attr.insert("name");
+        attr.insert("age");
+        Table t("mytable", attr);
+        vector<int> v;
+        v.push_back(9);
+        v.push_back(2);
+        t.addRow(v);
+        int size = t.getRelation().size();
+        vector<int> z;
+        z.push_back(9);
+        z.push_back(2);
+        t.addRow(z);
+        printf("\n");
+        if(size = t.getRelation().size()){
+            printf("\tPassed");
+        }
+        printf("\n\n");
+    } catch (const char* msg) {
+        printf("\n");
+        cerr << msg << endl;
+        printf("\n");
+   }
 
 }
 
@@ -83,8 +122,9 @@ int main()
 { 
   createTupleAndTraverse();
   TupleGetElement();
-  Table t = createTableTraverse();
-  DuplicateRows(t);
+  createTableTraverse();
+  moreThanOneRow();
+  DuplicateRows();
 
   
 } 

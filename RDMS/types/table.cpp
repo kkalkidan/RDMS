@@ -2,17 +2,19 @@
 #include <boost/foreach.hpp> 
 #define foreach BOOST_FOREACH  
     
-Table::Table(string table_name, set<string> attributes){
-    table_name = table_name;
-    attributes = attributes;
+Table::Table(string name, set<string> attri){
+    table_name = name;
+    attributes = attri;
     Relations = {};
-}
-Table Table:: addRow(vector<int> row){  
-
+};
+Table Table:: addRow(vector<int> row){ 
+    if(attributes.size() != row.size()) {
+        throw "More row elements than attributes! ";
+    }
     Relations.insert(Tuple(row));
     return *this;
 
-}
+};
 
 void Table:: showRows(){
 
@@ -20,7 +22,7 @@ void Table:: showRows(){
         element.traverse(element.getHead());
         printf("\n");
     }
-}
+};
 
 
 
