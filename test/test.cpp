@@ -117,6 +117,45 @@ void DuplicateRows() {
 
 }
 
+void createDatabase(){
+
+    printf("Testing: Creating a database, creating Table, Showing Rows \n");
+    Database database;
+    set<string> attributes;
+    attributes.insert("name");
+    attributes.insert("age");
+    Table t = database.createTable("mytable", attributes);
+    database.showDatabase();
+
+    
+    vector<int> v;
+    v.push_back(9);
+    v.push_back(2);
+    t = t.addRow(v);
+    t.showRows();
+
+    printf("\n");
+    printf("Passed");
+    printf("\n");
+
+}
+
+void CreateMultipleTablesInsideDatabase(){
+    printf("Testing: Creating Multiple Tables Inside Database \n");
+    Database database;
+    set<string> attributes;
+    attributes.insert("name");
+    attributes.insert("age");
+    Table t1 = database.createTable("mytable1", attributes);
+    Table t2 = database.createTable("mytable2", attributes);
+    Table t3 = database.createTable("mytable3", attributes);
+    database.showDatabase();
+
+    printf("\n");
+    printf("Passed");
+    printf("\n");
+}
+
 
 int main() 
 { 
@@ -125,6 +164,8 @@ int main()
   createTableTraverse();
   moreThanOneRow();
   DuplicateRows();
+  createDatabase();
+  CreateMultipleTablesInsideDatabase();
 
   
 } 

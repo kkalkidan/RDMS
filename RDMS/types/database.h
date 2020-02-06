@@ -1,31 +1,25 @@
-// #ifndef DATABASE_H
-// #define DATABASE_H
+#ifndef DATABASE_H
+#define DATABASE_H
 
-// #include <iostream>
-// #include <map>
-// #include <set>
-// #include "table.h"
-// #include "tuple.h"
+#include <iostream>
+#include <map>
+#include <set>
+#include "table.h"
+#include "tuple.h"
 
-// using namespace std; 
-// class Database{
+using namespace std; 
+class Database{
 
-//     private:
-//         map<string, Table> database;
+    private:
+        map<string, Table> database;
 
-//     public:
+    public:
 
-//         Table createTable(string table_name, set<string> attributes){
-//             // TODO RETURNS A TABLE
-//         };
+        Table createTable(string table_name, set<string> attributes);
 
-//         void showDatabase(){
-//             // TODO LISTS ALL THE TABLES IN THE DATASET
-//         };
+        void showDatabase();
 
-//         Table getTable(string table_name){
-//             // TODO RETURNS TABLE INSTANCE 
-//         };
-// };
+        Table getTable(string table_name);
+};
  
-// #endif
+#endif
