@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <string>
 #include <boost/foreach.hpp> 
+#define foreach BOOST_FOREACH  
 
 
 using namespace std; 
@@ -15,49 +16,56 @@ using namespace std;
 struct Node { 
     set<set<int>> base;
     struct Node* next;
-}; 
+        
+};
 
 class Tuple {
 
     private:
-        Node* head;
+        Node* first_node;
+        int size = 0;
 
     public :
+        Tuple(vector<int> v);
+        
         Node* newNode(set<set<int>> base);
 
         Node* createNode(Node* head, vector<int> v);
 
         void traverse(Node* next);
+
+        Node* getHead() {return first_node;};
         
-        Tuple* createTuple(vector<int> v);
+        int  getElement(int index, Node* head) const;
 
-        Node* getHead() {return head;};
-
-        friend bool operator==(const Tuple &left, const Tuple &right){
-            Node* left_head = left.head;
-            Node* right_head = right.head;
-            while(left_head != NULL && right_head != NULL){
-                if(left_head->base != right_head->base){
+        friend bool operator==(const Tuple &left, const Tuple &right){  
+            if(left.size != right.size){
+                return false;
+            }
+            int i =1;
+            for(i=1; i <= right.size; i++){
+                int first = left.getElement(i, left.first_node);
+                int second = right.getElement(i, left.first_node);
+                if(left.getElement(i, left.first_node) != right.getElement(i, left.first_node)){
                     return false;
                 }
-                left_head = left_head->next;
-                right_head = right_head->next;
-            }
-            if(left_head != NULL || right_head != NULL){
-                return false;
             }
             return true;
         };
         friend bool operator< (const Tuple &left, const Tuple &right){
-            Node* left_head = left.head;
-            Node* right_head = right.head;
-            if(left_head != NULL && right_head != NULL){
-                if(left_head->base > right_head->base){
-                    return false;
+            int i =1;
+            for(i=1; i <= right.size; i++){
+                int first = left.getElement(i, left.first_node);
+                int second = right.getElement(i, right.first_node);
+              
+                if(left.getElement(i, left.first_node) < right.getElement(i, right.first_node)){
+                    return true;
                 }
-            } return true;
-            
+            }
+            return false;
         };
+        int getSize(){return size;};
+       
   
 };
 #endif

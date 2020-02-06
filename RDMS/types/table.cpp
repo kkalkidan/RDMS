@@ -7,11 +7,9 @@ Table::Table(string table_name, set<string> attributes){
     attributes = attributes;
     Relations = {};
 }
-Table Table:: addRow(vector<int> row){
+Table Table:: addRow(vector<int> row){  
 
-    Tuple t;
-    t.createTuple(row);
-    Relations.insert(t);
+    Relations.insert(Tuple(row));
     return *this;
 
 }
