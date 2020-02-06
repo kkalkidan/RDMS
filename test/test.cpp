@@ -2,6 +2,7 @@
 #include "../RDMS/types/table.h"
 #include "../RDMS/types/database.h"
 #include <string>
+#include "../RDMS/operations/operations.h"
 
 void createTupleAndTraverse(){
 
@@ -156,6 +157,34 @@ void CreateMultipleTablesInsideDatabase(){
     printf("\n");
 }
 
+void TestUnion() {
+     printf("Testing: Union Operation \n");
+    set<string> attributes;
+    attributes.insert("name");
+    attributes.insert("age");
+    Table t1("table1", attributes);
+
+    
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+
+    t1.addRow(v);
+
+    Table t2("table2", attributes);
+
+    vector<int> z;
+    z.push_back(20);
+    z.push_back(20);
+
+    t2.addRow(z);
+
+    Table uni = Union(t1, t2);
+
+    printf("\n\n union size = %d", uni.getSize());
+
+}
+
 
 int main() 
 { 
@@ -166,6 +195,7 @@ int main()
   DuplicateRows();
   createDatabase();
   CreateMultipleTablesInsideDatabase();
+  TestUnion();
 
   
 } 

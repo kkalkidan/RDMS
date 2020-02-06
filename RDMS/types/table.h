@@ -18,7 +18,8 @@ class Table {
 
         Table(string table_name, set<string> attributes);
 
-        Table addRow(vector<int> row);
+        template <typename T>
+        Table addRow(T row);
 
         set<Tuple> getRelation(){return Relations;};
 

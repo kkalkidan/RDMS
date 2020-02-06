@@ -7,11 +7,23 @@ Table::Table(string name, set<string> attri){
     attributes = attri;
     Relations = {};
 };
+template <>
 Table Table:: addRow(vector<int> row){ 
     if(attributes.size() != row.size()) {
         throw "More row elements than attributes! ";
     }
     Relations.insert(Tuple(row));
+    return *this;
+
+};
+template <>
+Table Table:: addRow(Tuple tuple){
+
+    if(tuple.getSize() != attributes.size()){
+        throw "More row elements than attributes! ";
+    }
+    Relations.insert(tuple);
+
     return *this;
 
 };
