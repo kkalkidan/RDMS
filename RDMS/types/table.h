@@ -27,6 +27,8 @@ class Table {
         string getTableName(){return table_name;};
 
         void showRows();
+        int  getSize() {return Relations.size();};
+
 };
      
  
