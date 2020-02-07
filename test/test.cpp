@@ -248,6 +248,45 @@ void TestDifference(){
     }
 }
 
+void TestProjections(){
+    printf("Testing: Projections Operation \n");
+    set<string> attributes;
+    attributes.insert("name");
+    attributes.insert("age");
+
+    Table t1("table1", attributes);
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    t1.addRow(v);
+
+    set<string> proj_attributes;
+    proj_attributes.insert("name");
+    Table t2 = Projection(t1, proj_attributes);
+    t2.showRows();
+}
+
+void TestSelection(){
+    printf("Testing: Selection Operation \n");
+    set<string> attributes;
+    attributes.insert("name");
+    attributes.insert("age");
+
+    Table t1("table1", attributes);
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    t1.addRow(v);
+
+    vector<int> z;
+    z.push_back(30);
+    z.push_back(40);
+    t1.addRow(z);
+
+    Table t2 = Selection(t1, "name", '=', 20);
+    t2.showRows();   
+}
+
 
 int main() 
 { 
@@ -261,6 +300,8 @@ int main()
   TestUnion();
   TestIntersection();
   TestDifference();
+  TestProjections();
+  TestSelection();
 
   
 } 

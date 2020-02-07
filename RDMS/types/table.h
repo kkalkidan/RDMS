@@ -30,6 +30,8 @@ class Table {
         void showRows();
         int  getSize() {return Relations.size();};
 
+        int getIndex(string attr);
+
 };
      
  

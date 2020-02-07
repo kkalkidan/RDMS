@@ -36,7 +36,16 @@ void Table:: showRows(){
     }
 };
 
-
+int Table:: getIndex(string attr){
+    int i = 1;
+    foreach(string a, attributes){
+        if(a.compare(attr) == 0){
+            return i;
+        }
+        i++;
+    }
+    return -1;
+}
 
 
 
