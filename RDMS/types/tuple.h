@@ -45,8 +45,8 @@ class Tuple {
             int i =1;
             for(i=1; i <= right.size; i++){
                 int first = left.getElement(i, left.first_node);
-                int second = right.getElement(i, left.first_node);
-                if(left.getElement(i, left.first_node) != right.getElement(i, left.first_node)){
+                int second = right.getElement(i, right.first_node);
+                if(left.getElement(i, left.first_node) != right.getElement(i, right.first_node)){
                     return false;
                 }
             }

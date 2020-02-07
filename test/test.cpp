@@ -158,7 +158,7 @@ void CreateMultipleTablesInsideDatabase(){
 }
 
 void TestUnion() {
-     printf("Testing: Union Operation \n");
+    printf("Testing: Union Operation \n");
     set<string> attributes;
     attributes.insert("name");
     attributes.insert("age");
@@ -174,15 +174,78 @@ void TestUnion() {
     Table t2("table2", attributes);
 
     vector<int> z;
-    z.push_back(20);
+    z.push_back(10);
     z.push_back(20);
 
-    t2.addRow(z);
+    t1.addRow(z);
 
     Table uni = Union(t1, t2);
 
-    printf("\n\n union size = %d", uni.getSize());
+    printf("\n\n union size = %d\n\n", uni.getSize());
+    printf("\n\n Passed \n\n");
 
+}
+
+void TestIntersection(){
+    printf("Testing: Intersection Operation \n");
+    set<string> attributes;
+    attributes.insert("name");
+    attributes.insert("age");
+    Table t1("table1", attributes);
+    Table t2("table2", attributes);
+
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    
+    t1.addRow(v);
+
+    vector<int> z;
+    z.push_back(30);
+    z.push_back(20);
+    t2.addRow(v);
+    t2.addRow(z);
+    
+    Tuple tuple1(v);
+    Tuple tuple2(z);
+
+    Table inter = Intersection(t1, t2);
+
+    printf("\nintersection size = %d",inter.getSize());
+    if(inter.getSize() == 1){
+        printf("\nPassed\n");
+    }
+}
+
+void TestDifference(){
+    printf("Testing: Difference Operation \n");
+    set<string> attributes;
+    attributes.insert("name");
+    attributes.insert("age");
+    Table t1("table1", attributes);
+    Table t2("table2", attributes);
+
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    
+    t1.addRow(v);
+
+    vector<int> z;
+    z.push_back(30);
+    z.push_back(20);
+
+    t2.addRow(z);
+    
+    Tuple tuple1(v);
+    Tuple tuple2(z);
+
+    Table diff = Difference(t1, t2);
+
+    printf("\ndifference size = %d",diff.getSize());
+    if(diff.getSize() == 2){
+        printf("\nPassed\n");
+    }
 }
 
 
@@ -196,6 +259,8 @@ int main()
   createDatabase();
   CreateMultipleTablesInsideDatabase();
   TestUnion();
+  TestIntersection();
+  TestDifference();
 
   
 } 
