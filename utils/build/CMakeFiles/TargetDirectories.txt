@@ -1,3 +1,0 @@
-/home/kal/Desktop/RDMS/utils/build/CMakeFiles/rebuild_cache.dir
-/home/kal/Desktop/RDMS/utils/build/CMakeFiles/aout.dir
-/home/kal/Desktop/RDMS/utils/build/CMakeFiles/edit_cache.dir
