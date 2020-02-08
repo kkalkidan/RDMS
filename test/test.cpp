@@ -287,6 +287,37 @@ void TestSelection(){
     t2.showRows();   
 }
 
+void TestJoin(){
+    printf("Testing: Join Operation \n");
+    set<string> attributes;
+    attributes.insert("name");
+    attributes.insert("age");
+
+    Table t1("table1", attributes);
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    t1.addRow(v);
+    t1.showRows();
+
+    set<string> attributes2;
+    attributes2.insert("name");
+    attributes2.insert("hane");
+
+    Table t2("table2", attributes2);
+
+    vector<int> z;
+    z.push_back(20);
+    z.push_back(40);
+    t2.addRow(z);
+    t2.addRow(v);
+
+    Table t3 = Join(t1, t2);
+
+    t3.showRows();
+
+}
+
 
 int main() 
 { 
@@ -302,6 +333,7 @@ int main()
   TestDifference();
   TestProjections();
   TestSelection();
+  TestJoin();
 
   
 } 
