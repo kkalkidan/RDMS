@@ -26,7 +26,7 @@ Table Difference(Table t1, Table t2){
             } 
         if(add) {
             diff_t1_t2.addRow(mytuple1); 
-        }++it_t1;
+        }++it_t1; it_t2 = relation2.begin();
     } 
 
     it_t1 = relation1.begin();
@@ -45,7 +45,7 @@ Table Difference(Table t1, Table t2){
             } 
         if(add) {
             diff_t1_t2.addRow(mytuple2); 
-        }++it_t2;
+        }++it_t2; it_t1 = relation1.begin();
     }  
     
     return diff_t1_t2;

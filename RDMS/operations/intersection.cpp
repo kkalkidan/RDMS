@@ -11,13 +11,14 @@ Table Intersection(Table t1, Table t2){
     string inter_name = t1.getTableName() + "inter" + t2.getTableName();
 
     Table inter_t1_t2(inter_name, t1.getAttributes());
-
+    
     
     while(it_t1 != relation1.end()){
         Tuple mytuple1 = *it_t1;
         while(it_t2 != relation2.end()){
             Tuple mytuple2 = *it_t2;
-            
+            // mytuple1.traverse(mytuple1.getHead());
+            // mytuple2.traverse(mytuple2.getHead());
             if(mytuple1 == mytuple2) {
                 try{
   
@@ -32,7 +33,7 @@ Table Intersection(Table t1, Table t2){
         
             }   
             ++it_t2;         
-        }++it_t1;  
+        }++it_t1; it_t2 = relation2.begin(); 
 }
     return inter_t1_t2;
 };

@@ -6,6 +6,9 @@ Table Join (Table table1, Table table2){
     set<Tuple> relation1 = table1.getRelation();
     set<Tuple> relation2 = table2.getRelation();
 
+    set<Tuple>:: iterator it_t1 = relation1.begin();
+    set<Tuple>:: iterator it_t2 = relation2.begin();
+
     set<string> attribute1 = table1.getAttributes();
     set<string> attribute2 = table2.getAttributes();
 
@@ -35,8 +38,10 @@ Table Join (Table table1, Table table2){
     
     Table join_table(join_name, new_attr);
 
-    foreach(Tuple tuple1, relation1){
-        foreach(Tuple tuple2, relation2){
+    while(it_t1 != relation1.end()){
+        Tuple tuple1 = *it_t1;
+        while(it_t2 != relation2.end()){
+            Tuple tuple2 = *it_t2;
             bool add = true;
             foreach(string a, common){
                 index1 = table1.getIndex(a);
@@ -59,7 +64,8 @@ Table Join (Table table1, Table table2){
                 }
                 join_table.addRow(row);                   
                 }
-            }
+            it_t2++;
+            } it_t1++; it_t2 = relation2.begin();
         }
 
         return join_table;
