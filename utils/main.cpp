@@ -123,8 +123,15 @@ int main(int argc, char* argv[]) {
         table2.addRow(row);
         i++;
     }
+
     
     table2.showRows();
+
+
+    printf("\n\nTable 3 \n\n");
+
+    table3.showRows();
+
     printf("\n\n Union table 1 and table 3 \n\n");
     Table uni = Union(table1, table3);
     uni.showRows();
@@ -143,7 +150,7 @@ int main(int argc, char* argv[]) {
 
     printf("\n\nSelecting a row from table 3 \n\n");
 
-    Table sel = Selection(table3, "id", '=', 4);
+    Table sel = Selection(table3, "id", '=', 3);
     sel.showRows();
 
     printf("\n\nProjections  table 3 \n\n");
