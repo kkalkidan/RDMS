@@ -21,6 +21,7 @@ class Tuple {
         int size = 0;
 
     public :
+        Tuple();
         Tuple(char row[]);
         
         void display();
