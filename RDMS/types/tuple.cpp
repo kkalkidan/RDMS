@@ -1,114 +1,69 @@
 
 #include "tuple.h"
-#include <algorithm>
+#include <stdio.h> 
+#include <string.h> 
+  
 
 
 
 
+Tuple::Tuple(char row[]) 
+{   
+    char *token = strtok(row, " ");
+    string prev;
 
-Node *Tuple :: newNode(set<set<int>> base) 
-{ 
-    Node *new_node = new Node; 
-    new_node->base = base; 
-    new_node->next = NULL; 
-    return new_node; 
-};
-
-Node* Tuple :: createNode(Node* head, vector<int> v) 
-{ 
-    set<int> first, second;
-    set<set<int>> s;
-
-    first.insert(v.front());
-    if(v.size() > 1) second.insert(v.begin(), v.begin()+2);
-    else second.insert(v.front());
-
-    s.insert(first);
-    s.insert(second);
-
-    v.erase(v.begin());
-    
-    if (head == NULL)  
-        head = newNode(s); 
-
-    if(v.size() > 1) {
-        head->next = createNode(head->next, v); 
+    while(token != NULL){     
+        if(!prev.empty()){
+            set<int> first = {atoi(prev.c_str())};
+            set<int> second = {atoi(prev.c_str()), atoi(token)};
+            tuple.insert({first, second});
+        } else first_element = atoi(token);
+        prev = token; 
+        token = strtok(NULL, " ");
     }
+    size = tuple.size() +1;
     
-    return head; 
 };
 
 
-Tuple:: Tuple (vector<int> v){
+void Tuple::display(){
 
-    size = v.size();
-    first_node = createNode(NULL, v);
-}
+    get_element();
 
-
-void Tuple :: traverse(Node* head){
-    
-    if(head == NULL) return;
-    set<set<int>> ::iterator it;
-    set<set<int>> s = head->base;
-
-    printf("{ ");
-    for(it = s.begin(); it!= s.end(); ++it){
-        set<int> :: iterator in;
-        printf("{ ");
-        for(in = it->begin(); in!= it->end(); ++in){
-            printf("%d, ", *in);
-        } printf("}, ");
-    }
-    printf("}");
-    printf("->");
-    
-    traverse(head->next);
-    printf("\n");
 };
 
+int Tuple::get_element(int index) const{
+    
+    bool display = false;
+    if(index == 0){
+        display = true;
+        index = tuple.size()+1;
+    } 
 
-int Tuple :: getElement(int index, Node* head) const{
-    if(index <= 0 || index > size){
-        return -1;
-    }else {
-        Node* node = head;
-        int i =1;        
-        while(i < index && node->next != NULL){
-            i++;
-            if(node->next != NULL) node = node->next;
-        } 
-        set<set<int>> pairs = node->base;
-        
-        if(i == index){
-            foreach(set<int> pair, pairs){
-                if(pair.size() == 1){
-                    foreach(int element, pair){
-                        return element;
+    if(!display){
+        if(index > tuple.size()+1) {throw "Error!";}
+        if(index == 1){return first_element;}
+    }else printf("%d, ", first_element);
+
+    int element = first_element;
+    for(int i=1; i < index; i++){
+        foreach(set<set<int>> base, tuple){
+            if(base.find({element}) != base.end()){
+                foreach(set<int> ele , base){
+                    if(ele.size() == 2){
+                        foreach(int number, ele){
+                            if(number != element){
+                                element = number;
+                            }
+                        }
                     }
                 }
+            break;
             }
         }
-        
-        int first;
-        set<int> second, diff;
-        foreach(set<int> pair, pairs){
-            if(pair.size() == 1){
-                first = *(pair.begin());
-            }
-            if(pair.size() == 2){
-                second = pair;
-            }
-        }
-        if(second.size() == 2){
-            foreach(int element, second){
-                if(element != first){
-                    return element;
-                }
-            }
-        } 
-        return first;     
-    }
+        if(display) printf("%d, ", element);
+    }     
     
-};
+    return element;
 
+}

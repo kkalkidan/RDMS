@@ -13,59 +13,22 @@
 
 using namespace std; 
 
-struct Node { 
-    set<set<int>> base;
-    struct Node* next;
-        
-};
-
 class Tuple {
 
     private:
-        Node* first_node;
+        set<set<set<int>>> tuple;
+        int first_element;
         int size = 0;
 
     public :
-        Tuple(vector<int> v);
+        Tuple(char row[]);
         
-        Node* newNode(set<set<int>> base);
-
-        Node* createNode(Node* head, vector<int> v);
-
-        void traverse(Node* next);
-
-        Node* getHead() {return first_node;};
+        void display();
         
-        int  getElement(int index, Node* head) const;
+        int  get_element(int index=0) const;
 
-        friend bool operator==(const Tuple &left, const Tuple &right){  
-            if(left.size != right.size){
-                return false;
-            }
-            int i =1;
-            for(i=1; i <= right.size; i++){
-                int first = left.getElement(i, left.first_node);
-                int second = right.getElement(i, left.first_node);
-                if(left.getElement(i, left.first_node) != right.getElement(i, left.first_node)){
-                    return false;
-                }
-            }
-            return true;
-        };
-        friend bool operator< (const Tuple &left, const Tuple &right){
-            int i =1;
-            for(i=1; i <= right.size; i++){
-                int first = left.getElement(i, left.first_node);
-                int second = right.getElement(i, right.first_node);
-              
-                if(left.getElement(i, left.first_node) < right.getElement(i, right.first_node)){
-                    return true;
-                }
-            }
-            return false;
-        };
-        int getSize(){return size;};
+        int get_size(){return size;}
+   
        
-  
 };
 #endif
