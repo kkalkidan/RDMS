@@ -27,8 +27,21 @@ class Tuple {
         
         int  get_element(int index=0) const;
 
-        int get_size(){return size;}
-   
-       
+        int get_size(){return size;};
+
+        friend bool operator==(const Tuple &left, const Tuple &right){
+            if(left.size != right.size) return false;  
+            for(int i=1; i< left.size+1; i++){
+                if(left.get_element(i) != right.get_element(i)){
+                    return false;
+                }
+            }
+            return true;
+        };
+
+        friend bool operator>(const Tuple &left, const Tuple &right){
+            if(left.get_element(1) > left.get_element(1)){return true;}
+            return false;
+        };
 };
 #endif
