@@ -7,7 +7,7 @@ The latest version can be found on the `operations` branch
 - and `tables.getRelation()` returns set of Tuples
 - based on that you can implement the operations
 - `./aout` will run the tests.
-**This README will be edited further after the some bugs/issues that are recently encountered are fixed**
+**This README will be edited further after fixing the some bugs/issues that are encountered while making change to some implementations**
 
 
 ## Running `cmake`
